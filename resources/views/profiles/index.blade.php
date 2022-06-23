@@ -21,13 +21,18 @@
     </div> -->
     <div class="row pt-5" >
         <div class="col-3">
-            <img class="rounded-circle" src="/img/freecodecamplogo.jpg" alt="">
+            <img class="rounded-circle w-100" src="{{ $user->profile->profileImage() }}" alt="">
         </div>
         <div class="col-9">
             <div class="d-flex justify-content-between align-items-baseline">
                 <h1>{{ $user->username }}</h1>
-                <a href="">Add new post</a>
+                @can('update', $user->profile)
+                    <a href="/p/create">Add new post</a>
+                @endcan                
             </div>
+            @can('update', $user->profile)
+                <a href="/profile/{{$user->id}}/edit">Edit Profile</a>
+            @endcan
             <div class="d-flex">
                 <div style="padding-right:5px"><strong>{{ $user->posts->count() }}</strong> posts</div>
                 <div style="padding-right:5px"><strong>{{ $user->posts->count() }}</strong> followers</div>
@@ -42,7 +47,9 @@
     <div class="row pt-5">
         @foreach($user->posts as $post)
         <div class="col-4 pb-4">
-            <img style="width:100px" class="w-100 pt-4" src="/storage/{{ $post->image }}" alt="">
+            <a href="/p/{{ $post->id }}">
+                <img style="width:100px" class="w-100 pt-4" src="/storage/{{ $post->image }}" alt="">
+            </a>
         </div>
         @endforeach
         <!-- <div class="col-4">
