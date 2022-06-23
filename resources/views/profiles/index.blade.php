@@ -29,9 +29,9 @@
                 <a href="">Add new post</a>
             </div>
             <div class="d-flex">
-                <div style="padding-right:5px"><strong>153</strong> posts</div>
-                <div style="padding-right:5px"><strong>23k</strong> followers</div>
-                <div style="padding-right:5px"><strong>212</strong> following</div>
+                <div style="padding-right:5px"><strong>{{ $user->posts->count() }}</strong> posts</div>
+                <div style="padding-right:5px"><strong>{{ $user->posts->count() }}</strong> followers</div>
+                <div style="padding-right:5px"><strong>{{ $user->posts->count() }}</strong> following</div>
             </div>
             <div class="pt-4 font-weight-bold">{{ $user->profile->title ?? ""}}</div>
             <div>{{ $user->profile->description ?? "" }}</div>
@@ -40,8 +40,8 @@
         </div>
     </div>
     <div class="row pt-5">
-        @foreach($user->posts as $posts)
-        <div class="col-4">
+        @foreach($user->posts as $post)
+        <div class="col-4 pb-4">
             <img style="width:100px" class="w-100 pt-4" src="/storage/{{ $post->image }}" alt="">
         </div>
         @endforeach
